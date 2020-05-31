@@ -1,0 +1,116 @@
+body{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	width: 100vw;
+	margin: 0;
+	font-size: 14px;
+	font-family: Arial, sans-serif;
+}
+
+#outside-layer{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+#tag-image-box{
+	position: relative;
+}
+
+#tag-image{
+	cursor: pointer;
+}
+
+#tagTextBox{
+	display: none;
+	position: absolute;
+	width: 150px;
+}
+
+#tagText{
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #bdc3c7;
+
+	outline: 0;
+	box-sizing: border-box;
+}
+
+#tagSuggestions{
+	background: white;
+	width: 100%;
+	box-sizing: border-box;
+	border-radius: 0 0 5px 5px;
+	border: 1px solid #bdc3c7;
+	border-top: none;
+}
+
+#tagSuggestionsList{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#tagSuggestionsList li{
+	cursor: pointer;
+	padding: 5px;
+	color: #7f8c8d;
+}
+
+#tagList{
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.tag-box{
+	display: flex;
+	position: absolute;
+	border-radius: 3px;
+	width: 80px;
+	height: 100px;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.tag-box:hover .tag,.tag-box:hover .tag-close{
+	display: block;
+}
+
+.tag{
+	display: none;
+	position: absolute;
+	background-color: white;
+	border-radius: 3px;
+	padding: 4px;
+	bottom: 0;
+	white-space: nowrap;
+	text-align: center;
+	z-index: 1000;
+}
+
+.tag::before{
+	content: '';
+	position: absolute;
+	border: 5px solid transparent;
+	border-bottom-color: white;
+	left: 40%;
+	top: -10px;
+}
+
+.tag-close{
+	font-size: 10px;
+	color: black;
+	background-color: white;
+	top: -6px;
+	right: -6px;
+	position: absolute;
+	height: 12px;
+	width: 12px;
+	padding: 2px;
+	border-radius: 100%;
+}
