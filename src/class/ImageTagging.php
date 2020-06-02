@@ -2,19 +2,32 @@
 class ImageTagging
 {
 	public $pdo;
+	public $host = 'localhost';
+	public $dbname = 'imagetagging';
+	public $user = 'root';
+	public $password = '';
+	public $table = 'ourusers';
+	
 	function __construct()
 	{
-		try {				
-			$this->pdo = new PDO("mysql:host=localhost;dbname=imagetagging;charset=utf8", 'root', '');
+		try {
+			$this->pdo = new PDO("mysql:host=".$this->host.";dbname=".$this->dbname.";charset=utf8", $this->user, $this->password);
 			$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$this->setTablePK();
 			return $this->pdo;
 		} catch (PDOException $e) {
 			echo "Connection Failed: ".$e->getMessage();
 		}
 	}
 
+	public function setTablePK(){
+		$stmt = $this->pdo->prepare("SHOW KEYS FROM ".$this->table." WHERE Key_name = 'PRIMARY'");
+		$stmt->execute();
+		$this->tablePK =  $stmt->fetch()['Column_name'];
+	}
+
 	public function getUsers($value){
-		$sql = "SELECT user_id, name FROM users WHERE name LIKE '$value%' LIMIT 5";
+		$sql = "SELECT ".$this->tablePK.", name FROM ".$this->table." WHERE name LIKE '$value%' LIMIT 5";
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->execute();
 		return $stmt;
@@ -35,7 +48,7 @@ class ImageTagging
 	}
 
 	public function getTagUser($userId){
-		$sql = "SELECT name FROM users WHERE user_id = $userId";
+		$sql = "SELECT name FROM ".$this->table." WHERE ".$this->tablePK." = $userId";
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->execute();
 		return $stmt;

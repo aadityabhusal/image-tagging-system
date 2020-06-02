@@ -1,6 +1,5 @@
 <?php 
-
-include __DIR__.'/../class/ImageTagging.php';
+include '../class/ImageTagging.php';
 
 if(isset($_POST['imgId']) && !empty($_POST['imgId'])){
 	$users = new ImageTagging();

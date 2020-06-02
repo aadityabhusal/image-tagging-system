@@ -1,21 +1,30 @@
-var imageBox = document.getElementById('tag-image-box');
-var image = document.getElementById('tag-image');
-var tagTextBox = document.getElementById('tagTextBox');
-var inputField = document.getElementById('tagText');
-var suggestions = document.getElementById('tagSuggestions');
-var suggestionsList = document.getElementById('tagSuggestionsList');
-var tagCloseX = document.getElementsByClassName('tag-close');
-var tagX;
-var tagY;
+const imageBox = document.getElementById('tag-image-box');
+const image = document.getElementById('tag-image');
+const tagTextBox = document.getElementById('tagTextBox');
+const inputField = document.getElementById('tagText');
+const suggestions = document.getElementById('tagSuggestions');
+const suggestionsList = document.getElementById('tagSuggestionsList');
+const tagCloseX = document.getElementsByClassName('tag-close');
+let tagX;
+let tagY;
+let XHR;
 
-document.getElementById('outside-layer').addEventListener('click',function(){
-	tagTextBox.style.display = 'none';
-	inputField.value = '';
-});
+document.addEventListener('DOMContentLoaded',setInit);
 
-document.addEventListener('DOMContentLoaded',showTags);
+function setInit(){
+	
+	document.getElementById('outside-layer').addEventListener('click',function(){
+		tagTextBox.style.display = 'none';
+		inputField.value = '';
+	});
 
-image.addEventListener('click',inputDisplay);
+	document.getElementById('tagText').addEventListener('keyup',function(){
+		getUsers();
+	});
+
+	image.addEventListener('click',inputDisplay);
+	showTags();
+}
 
 // inputField.addEventListener('focusout', imageTag);
 
@@ -36,7 +45,7 @@ function createXHR(parameters,fileName){
 		XHR = new ActiveXObject('Microsoft.XMLHTTP');
 	}
 	
-	XHR.open('POST','modules/'+fileName+'.php',true);
+	XHR.open('POST','./src/modules/'+fileName+'.php',true);
 	XHR.setRequestHeader('Content-type','application/x-www-form-urlencoded');
 	XHR.send(parameters);
 

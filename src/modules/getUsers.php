@@ -1,5 +1,5 @@
 <?php 
-include __DIR__.'/../class/ImageTagging.php';
+include '../class/ImageTagging.php';
 
 if(isset($_POST['userName']) && !empty(trim($_POST['userName']))){
 	$users = new ImageTagging();
@@ -7,7 +7,7 @@ if(isset($_POST['userName']) && !empty(trim($_POST['userName']))){
 	$data = $result->fetchAll();
 
 	foreach ($data as $key => $value) {
-		echo "<li class='tagNames' onClick='setTag(this)' data-userid='".$value['user_id']."'>".$value['name']."</li>";
+		echo "<li class='tagNames' onClick='setTag(this)' data-userid='".$value[$users->tablePK]."'>".$value['name']."</li>";
 	}
 }
 
