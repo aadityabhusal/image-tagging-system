@@ -2,13 +2,13 @@
 include '../class/ImageTagging.php';
 
 if(isset($_POST['imgId']) && !empty($_POST['imgId'])){
-	$users = new ImageTagging();
-	$result = $users->showTags($_POST['imgId']);
+	$items = new ImageTagging();
+	$result = $items->showTags($_POST['imgId']);
 	$data = $result->fetchAll();
 
 	foreach ($data as $key => $value) {
-		$gUser = $users->getTagUser($value['user_id']);
-		$gUR = $gUser->fetch();
+		$gItem = $items->getTagItem($value['item_id']);
+		$gUR = $gItem->fetch();
 		echo '<div class="tag-box" style="top: '.$value["tag_y"].'px; left: '.$value["tag_x"].'px;" >
 				<div class="tag">
 					'.$gUR["name"].'

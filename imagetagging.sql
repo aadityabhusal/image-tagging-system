@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2020 at 04:20 PM
+-- Generation Time: Jun 08, 2020 at 01:55 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `tags` (
   `tag_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
   `image_id` int(11) NOT NULL,
   `tag_x` int(11) NOT NULL,
   `tag_y` int(11) NOT NULL
@@ -101,8 +101,7 @@ INSERT INTO `users` (`user_id`, `name`) VALUES
 -- Indexes for table `tags`
 --
 ALTER TABLE `tags`
-  ADD PRIMARY KEY (`tag_id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD PRIMARY KEY (`tag_id`);
 
 --
 -- Indexes for table `users`
@@ -126,16 +125,6 @@ ALTER TABLE `tags`
 --
 ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `tags`
---
-ALTER TABLE `tags`
-  ADD CONSTRAINT `fk_tags_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

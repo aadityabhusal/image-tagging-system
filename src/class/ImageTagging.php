@@ -6,7 +6,7 @@ class ImageTagging
 	public $dbname = 'imagetagging';
 	public $user = 'root';
 	public $password = '';
-	public $table = 'ourusers';
+	public $table = 'users';
 	
 	function __construct()
 	{
@@ -26,7 +26,7 @@ class ImageTagging
 		$this->tablePK =  $stmt->fetch()['Column_name'];
 	}
 
-	public function getUsers($value){
+	public function getListItems($value){
 		$sql = "SELECT ".$this->tablePK.", name FROM ".$this->table." WHERE name LIKE '$value%' LIMIT 5";
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->execute();
@@ -34,7 +34,7 @@ class ImageTagging
 	}
 
 	public function setTag($tagId, $imageId, $tagX, $tagY){
-		$sql = "INSERT INTO tags(tag_id, user_id, image_id, tag_x, tag_y) VALUES('',$tagId, $imageId, $tagX, $tagY)";
+		$sql = "INSERT INTO tags(tag_id, item_id, image_id, tag_x, tag_y) VALUES('',$tagId, $imageId, $tagX, $tagY)";
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->execute();
 		return $stmt;
@@ -47,8 +47,8 @@ class ImageTagging
 		return $stmt;
 	}
 
-	public function getTagUser($userId){
-		$sql = "SELECT name FROM ".$this->table." WHERE ".$this->tablePK." = $userId";
+	public function getTagItem($itemId){
+		$sql = "SELECT name FROM ".$this->table." WHERE ".$this->tablePK." = $itemId";
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->execute();
 		return $stmt;

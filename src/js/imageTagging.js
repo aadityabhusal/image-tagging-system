@@ -19,7 +19,7 @@ function setInit(){
 	});
 
 	document.getElementById('tagText').addEventListener('keyup',function(){
-		getUsers();
+		getListItems();
 	});
 
 	image.addEventListener('click',inputDisplay);
@@ -52,12 +52,12 @@ function createXHR(parameters,fileName){
 	return XHR;
 }
 
-function getUsers(){
-	users = createXHR('userName=' + document.getElementById('tagText').value, 'getUsers');
+function getListItems(){
+	items = createXHR('itemName=' + document.getElementById('tagText').value, 'getListItems');
 
-	users.onreadystatechange = function(){
-		if(users.readyState==4 && users.status==200){
-			suggestionsList.innerHTML = users.responseText;
+	items.onreadystatechange = function(){
+		if(items.readyState==4 && items.status==200){
+			suggestionsList.innerHTML = items.responseText;
 		}
 	}
 }
@@ -66,7 +66,7 @@ function setTag(elems){
 	tagTextBox.style.display = 'none';
 	inputField.value = '';
 
-	tags = createXHR('tagId=' + elems.getAttribute('data-userid') +'&imageId='+image.getAttribute('data-imageId') + '&tagX='+(tagX-40)+'&tagY='+(tagY-40), 'setTag');
+	tags = createXHR('tagId=' + elems.getAttribute('data-itemid') +'&imageId='+image.getAttribute('data-imageId') + '&tagX='+(tagX-40)+'&tagY='+(tagY-40), 'setTag');
 
 	tags.onreadystatechange = function(){
 		if(tags.readyState==4 && tags.status==200){

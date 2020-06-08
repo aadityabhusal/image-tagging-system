@@ -3,7 +3,7 @@
 --
 CREATE TABLE `tags` (
   `tag_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
   `image_id` int(11) NOT NULL,
   `tag_x` int(11) NOT NULL,
   `tag_y` int(11) NOT NULL
